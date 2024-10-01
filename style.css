@@ -55,11 +55,14 @@ ul {
     padding-inline-start: 0;
 }
 
+
+
 #numbers {
     display: flex;
     padding: 10px;
     flex-wrap: wrap;
     gap: 10px;
+    
 }
 
 #functions {
@@ -68,13 +71,19 @@ ul {
     flex-wrap: wrap;
     padding:10px;
     gap:10px;
+    flex-grow: 1;
 }
 button {
     height: 150px;
-    width: 175px;
+    width: 200px;
     border-radius: 10px;
+}
+#functions > li > button {
+    height:97px;
+    width:175px;
+
 }
 
 #zero {
-    width:300px;
+    width:360px;
 }
