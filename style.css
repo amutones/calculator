@@ -20,6 +20,7 @@ body {
 #container {
    border: 2px solid; 
    border-radius: 10px;
+   background-color: darkgray;
 }
 #display {
     border: 2px solid;
@@ -27,12 +28,14 @@ body {
     padding:10px;
     margin:10px;
     text-align: right;
+    background-color: beige;
 }
 #buttons-container {
     display:flex;
     border:2px solid;
     border-radius: 10px;
     margin:10px;
+    background-color: lightgray;
 }
 #numbers-container {
     flex:2 1 0%;
@@ -66,7 +69,13 @@ ul {
     gap:10px;
 }
 button {
-    border-radius: px;
+    border-radius: 5px;
     height:100%;
     width:100%;
+    background-color: blanchedalmond;
+}
+
+#equal {
+    background-color: salmon;
+    color:antiquewhite
 }
