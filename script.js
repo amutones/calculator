@@ -14,7 +14,7 @@ functionButtons.addEventListener("click", getOperator);
 
 function getOperator(e){
     operator = e.target.id;
-    console.log(operator);
+    secondNum = Number(displayContent);
     operate(firstNum, secondNum, operator);
 }
 
@@ -33,9 +33,10 @@ function showDisplay(event) {
 }
 
 function operate(a, b, c) {
+    console.log(c);
     switch (c) {
         case "+":
-            add(a,b);
+            display.textContent = add(a,b);
             break;
         case "-":
             subtract(a,b);
@@ -47,7 +48,10 @@ function operate(a, b, c) {
             divide(a,b);
             break; 
         case "clear":
-            display.textContent = defaultContent;
+            firstNum = 0;
+            secondNum = 0;
+            displayContent = defaultContent;
+            display.textContent = displayContent;
             break;
         case "equal":
             break;
