@@ -4,14 +4,27 @@ let operator = "";
 let numButtons = document.querySelector("#numbers");
 let functionButtons = document.querySelector("#functions");
 let display = document.querySelector("#display");
+let displayContent = "00000000.00";
 
-numButtons.addEventListener("click", function() {
-    display.textContent = "hi";
-})
+numButtons.addEventListener("click", showDisplay);
 
 functionButtons.addEventListener("click", function() {
     alert("hi");
 })
+
+function showDisplay(event) {
+    const btn = event.target;
+    if (displayContent.length < 8) {
+        displayContent = displayContent.concat(btn.innerText); 
+    }
+    else if(displayContent.length === 8){
+        displayContent = displayContent;    
+    }
+    else {
+        displayContent = btn.innerText;
+    }
+    display.textContent = displayContent;
+}
 
 function operate(a, b, c) {
     switch (c) {
