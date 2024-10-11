@@ -4,13 +4,19 @@ let operator = "";
 let numButtons = document.querySelector("#numbers");
 let functionButtons = document.querySelector("#functions");
 let display = document.querySelector("#display");
-let displayContent = "00000000.00";
+const defaultContent = "00000000.00"
+let displayContent = defaultContent;
+
 
 numButtons.addEventListener("click", showDisplay);
 
-functionButtons.addEventListener("click", function() {
-    alert("hi");
-})
+functionButtons.addEventListener("click", getOperator);
+
+function getOperator(e){
+    operator = e.target.id;
+    console.log(operator);
+    operate(firstNum, secondNum, operator);
+}
 
 function showDisplay(event) {
     const btn = event.target;
@@ -39,7 +45,12 @@ function operate(a, b, c) {
             break;
         case "/":
             divide(a,b);
-            break;   
+            break; 
+        case "clear":
+            display.textContent = defaultContent;
+            break;
+        case "equal":
+            break;
         default:
             break;
     }
