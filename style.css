@@ -29,6 +29,7 @@ body {
     margin:10px;
     text-align: right;
     background-color: beige;
+    font-size: 3em;
 }
 #buttons-container {
     display:flex;
