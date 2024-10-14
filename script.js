@@ -6,6 +6,7 @@ let functionButtons = document.querySelector("#functions");
 let display = document.querySelector("#display");
 const defaultContent = "00000000.00"
 let displayContent = defaultContent;
+let decimalButton = document.querySelector("#decimal");
 
 
 numButtons.addEventListener("click", showDisplay);
@@ -29,14 +30,19 @@ function showDisplay(event) {
     else {
         displayContent = btn.innerText;
     }
+
     display.textContent = displayContent;
+
+    if(displayContent.includes(".")) {
+        decimalButton.disabled = true;
+    }
 }
 
 function operate(a, b, c) {
     console.log(c);
     switch (c) {
         case "+":
-            display.textContent = add(a,b);
+            add(a,b);
             break;
         case "-":
             subtract(a,b);
@@ -52,6 +58,7 @@ function operate(a, b, c) {
             secondNum = 0;
             displayContent = defaultContent;
             display.textContent = displayContent;
+            decimalButton.disabled = false;
             break;
         case "equal":
             break;
