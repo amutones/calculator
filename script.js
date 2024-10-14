@@ -1,12 +1,15 @@
 let firstNum = 0;
 let secondNum = 0;
+let result = 0;
 let operator = "";
+let previousOperator = "";
 let numButtons = document.querySelector("#numbers");
 let functionButtons = document.querySelector("#functions");
 let display = document.querySelector("#display");
 const defaultContent = "00000000.00"
 let displayContent = defaultContent;
 let decimalButton = document.querySelector("#decimal");
+
 
 
 numButtons.addEventListener("click", showDisplay);
@@ -42,16 +45,16 @@ function operate(a, b, c) {
     console.log(c);
     switch (c) {
         case "+":
-            add(a,b);
+            result = add(a,b);
             break;
         case "-":
-            subtract(a,b);
+            result = subtract(a,b);
             break;
         case "*":
-            multiply(a,b);
+            result = multiply(a,b);
             break;
         case "/":
-            divide(a,b);
+            result = divide(a,b);
             break; 
         case "clear":
             firstNum = 0;
