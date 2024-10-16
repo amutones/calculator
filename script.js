@@ -6,7 +6,7 @@ let previousOperator = "";
 let numButtons = document.querySelector("#numbers");
 let functionButtons = document.querySelector("#functions");
 let display = document.querySelector("#display");
-const defaultContent = "00000000.00"
+const defaultContent = "0";
 let displayContent = defaultContent;
 let decimalButton = document.querySelector("#decimal");
 
@@ -24,6 +24,9 @@ function getOperator(e){
 
 function showDisplay(event) {
     const btn = event.target;
+    if(Number(displayContent.charAt(0)) === 0) {
+        displayContent = "";
+    }
     if (displayContent.length < 8) {
         displayContent = displayContent.concat(btn.innerText); 
     }
@@ -42,7 +45,6 @@ function showDisplay(event) {
 }
 
 function operate(a, b, c) {
-    console.log(c);
     switch (c) {
         case "+":
             result = add(a,b);
