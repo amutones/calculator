@@ -87,3 +87,7 @@ function clear() {
     display.textContent = displayContent;
     decimalButton.disabled = false;
 }
+
+function roundAnswer(a) {
+    return Math.round(a * 100) / 100;
+}
