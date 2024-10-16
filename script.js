@@ -57,11 +57,7 @@ function operate(a, b, c) {
             result = divide(a,b);
             break; 
         case "clear":
-            firstNum = 0;
-            secondNum = 0;
-            displayContent = defaultContent;
-            display.textContent = displayContent;
-            decimalButton.disabled = false;
+            clear();
             break;
         case "equal":
             break;
@@ -83,5 +79,9 @@ function divide(a, b) {
     return a / b;
 }
 function clear() {
-
+    firstNum = 0;
+    secondNum = 0;
+    displayContent = defaultContent;
+    display.textContent = displayContent;
+    decimalButton.disabled = false;
 }
