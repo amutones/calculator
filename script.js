@@ -10,24 +10,21 @@ const defaultContent = "0";
 let displayContent = defaultContent;
 let decimalButton = document.querySelector("#decimal");
 
-
-
 numButtons.addEventListener("click", showDisplay);
 
 functionButtons.addEventListener("click", getOperator);
 
-function getOperator(e){
-    operator = e.target.id;
-    secondNum = Number(displayContent);
-    operate(firstNum, secondNum, operator);
-}
-
 function showDisplay(event) {
     const btn = event.target;
-    if(Number(displayContent.charAt(0)) === 0) {
-        displayContent = "";
+    console.log(btn.id);
+    if (btn.id === "decimal" && displayContent === defaultContent) {
+        displayContent = "0.";
     }
-    if (displayContent.length < 8) {
+    else if (displayContent === defaultContent) {
+        displayContent = "";
+        displayContent = displayContent.concat(btn.innerText); 
+    }
+    else if (displayContent.length < 8) {
         displayContent = displayContent.concat(btn.innerText); 
     }
     else if(displayContent.length === 8){
@@ -42,6 +39,12 @@ function showDisplay(event) {
     if(displayContent.includes(".")) {
         decimalButton.disabled = true;
     }
+}
+
+function getOperator(e){
+    operator = e.target.id;
+    secondNum = Number(displayContent);
+    operate(firstNum, secondNum, operator);
 }
 
 function operate(a, b, c) {
