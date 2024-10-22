@@ -47,13 +47,14 @@ function showDisplay(e) {
 function getOperator(e){
     operator = e.target.id;
     displayNum = Number(displayContent);
-    if (previousOperator === "") {
+    
+    if (operator === "clear") {
+        result = clear();
+    }
+    else if (previousOperator === "") {
         previousOperator = operator;
         previousNum = displayNum;
         result = displayNum;
-    }
-    else if (operator === "clear") {
-        result = clear();
     }
     else if (operator === "equal") {
         result = operate(previousNum, displayNum, previousOperator);
@@ -67,7 +68,8 @@ function getOperator(e){
     }
     display.textContent = result;
     console.log("End of function\npreviousNum: ", previousNum, "\ndisplayNum: ", displayNum, "\nresult: ", result, "\npreviousOperator: ", previousOperator);
-    displayContent = "";   
+    displayContent = "";
+    decimalButton.disabled = false;   
 }
 
 function operate(a, b, c) {
