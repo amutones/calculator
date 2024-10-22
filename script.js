@@ -1,26 +1,29 @@
-let firstNum = 0;
-let secondNum = 0;
-let result = 0;
+const DEFAULT_CONTENT = 0;
+const MAX_RESULT = 999999999;
+let previousNum = DEFAULT_CONTENT;
+let displayNum = DEFAULT_CONTENT;
+let result = DEFAULT_CONTENT;
+let previousResult = DEFAULT_CONTENT;
 let operator = "";
 let previousOperator = "";
 let numButtons = document.querySelector("#numbers");
 let functionButtons = document.querySelector("#functions");
 let display = document.querySelector("#display");
-const defaultContent = "0";
-let displayContent = defaultContent;
+let displayContent = DEFAULT_CONTENT;
 let decimalButton = document.querySelector("#decimal");
+
 
 numButtons.addEventListener("click", showDisplay);
 
 functionButtons.addEventListener("click", getOperator);
 
-function showDisplay(event) {
-    const btn = event.target;
-    console.log(btn.id);
-    if (btn.id === "decimal" && displayContent === defaultContent) {
+
+function showDisplay(e) {
+    const btn = e.target;
+    if (btn.id === "decimal" && (displayContent === "" || displayContent === DEFAULT_CONTENT)) {
         displayContent = "0.";
     }
-    else if (displayContent === defaultContent) {
+    else if (displayContent === DEFAULT_CONTENT) {
         displayContent = "";
         displayContent = displayContent.concat(btn.innerText); 
     }
@@ -43,29 +46,53 @@ function showDisplay(event) {
 
 function getOperator(e){
     operator = e.target.id;
-    secondNum = Number(displayContent);
-    operate(firstNum, secondNum, operator);
+    console.log(operator);
+    displayNum = Number(displayContent);
+    console.log(displayNum);
+    if (previousOperator === "") {
+        previousOperator = operator;
+        previousNum = displayNum;
+        result = displayNum;
+    }
+    else if (operator === "clear") {
+        result = clear();
+    }
+    else if (operator === "equal") {
+        result = operate(previousNum, displayNum, previousOperator);
+        previousNum = result;
+        previousOperator = "";
+    }
+    else {
+        console.log("Else logic");
+
+        result = operate(previousNum, displayNum, previousOperator);
+        console.log("previousNum ", previousNum, "\npreviousOperator ", previousOperator, "\nresult ", result);
+        previousNum = result;
+        previousOperator = operator;
+    }
+    
+    console.log("Post else\npreviousNum ", previousNum, "\npreviousOperator ", previousOperator, "\nresult ", result);
+    display.textContent = result;
+    displayContent = "";
+    
+    
 }
 
 function operate(a, b, c) {
     switch (c) {
         case "+":
-            result = add(a,b);
-            break;
+            return add(a,b);
         case "-":
-            result = subtract(a,b);
-            break;
+            return subtract(a,b);
         case "*":
-            result = multiply(a,b);
-            break;
+            return multiply(a,b);
         case "/":
-            result = divide(a,b);
-            break; 
-        case "clear":
-            clear();
-            break;
-        case "equal":
-            break;
+            return divide(a,b);
+        // case "clear":
+        //     previousOperator = "";
+        //     return clear();
+        // case "equal":
+        //     return operate(a,b,previousOperator);
         default:
             break;
     }
@@ -84,13 +111,22 @@ function divide(a, b) {
     return a / b;
 }
 function clear() {
-    firstNum = 0;
-    secondNum = 0;
-    displayContent = defaultContent;
-    display.textContent = displayContent;
+    previousNum = DEFAULT_CONTENT;
+    displayNum = DEFAULT_CONTENT;
+    previousOperator = "";
     decimalButton.disabled = false;
+    return DEFAULT_CONTENT;
 }
 
 function roundAnswer(a) {
     return Math.round(a * 100) / 100;
+}
+
+function checkResult(a) {
+    if (a >= MAX_RESULT) {
+        return MAX_RESULT;
+    } else {
+        return a;
+    }
+    
 }
