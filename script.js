@@ -80,11 +80,6 @@ function operate(a, b, c) {
             return multiply(a,b);
         case "/":
             return divide(a,b);
-        // case "clear":
-        //     previousOperator = "";
-        //     return clear();
-        // case "equal":
-        //     return operate(a,b,previousOperator);
         default:
             break;
     }
@@ -100,7 +95,12 @@ function multiply(a, b) {
     return a * b;
 }
 function divide(a, b) {
-    return a / b;
+    if (b === 0) {
+        return "ERROR!";
+    }
+    else {
+        return a / b;
+    }
 }
 function clear() {
     previousNum = DEFAULT_CONTENT;
