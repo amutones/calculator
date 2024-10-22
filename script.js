@@ -46,9 +46,7 @@ function showDisplay(e) {
 
 function getOperator(e){
     operator = e.target.id;
-    console.log(operator);
     displayNum = Number(displayContent);
-    console.log(displayNum);
     if (previousOperator === "") {
         previousOperator = operator;
         previousNum = displayNum;
@@ -60,22 +58,16 @@ function getOperator(e){
     else if (operator === "equal") {
         result = operate(previousNum, displayNum, previousOperator);
         previousNum = result;
-        previousOperator = "";
+        
     }
     else {
-        console.log("Else logic");
-
         result = operate(previousNum, displayNum, previousOperator);
-        console.log("previousNum ", previousNum, "\npreviousOperator ", previousOperator, "\nresult ", result);
         previousNum = result;
         previousOperator = operator;
     }
-    
-    console.log("Post else\npreviousNum ", previousNum, "\npreviousOperator ", previousOperator, "\nresult ", result);
     display.textContent = result;
-    displayContent = "";
-    
-    
+    console.log("End of function\npreviousNum: ", previousNum, "\ndisplayNum: ", displayNum, "\nresult: ", result, "\npreviousOperator: ", previousOperator);
+    displayContent = "";   
 }
 
 function operate(a, b, c) {
