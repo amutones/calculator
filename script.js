@@ -1,5 +1,5 @@
 const DEFAULT_CONTENT = 0;
-const MAX_RESULT = 999999999;
+const MAX_RESULT = 99999999;
 let previousNum = DEFAULT_CONTENT;
 let displayNum = DEFAULT_CONTENT;
 let result = DEFAULT_CONTENT;
@@ -54,19 +54,26 @@ function getOperator(e){
     else if (previousOperator === "") {
         previousOperator = operator;
         previousNum = displayNum;
-        result = displayNum;
+        result = roundAnswer(displayNum);
     }
     else if (operator === "equal") {
-        result = operate(previousNum, displayNum, previousOperator);
+        result = roundAnswer(checkResult(operate(previousNum, displayNum, previousOperator)));
         previousNum = result;
         
     }
     else {
-        result = operate(previousNum, displayNum, previousOperator);
+        result = roundAnswer(checkResult(operate(previousNum, displayNum, previousOperator)));
         previousNum = result;
         previousOperator = operator;
     }
-    display.textContent = result;
+    
+    if (Number.isNaN(result)) {
+        display.textContent = "ERROR!";
+    }
+    else {
+        display.textContent = result;
+    }
+    
     console.log("End of function\npreviousNum: ", previousNum, "\ndisplayNum: ", displayNum, "\nresult: ", result, "\npreviousOperator: ", previousOperator);
     displayContent = "";
     decimalButton.disabled = false;   
@@ -97,12 +104,7 @@ function multiply(a, b) {
     return a * b;
 }
 function divide(a, b) {
-    if (b === 0) {
-        return "ERROR!";
-    }
-    else {
-        return a / b;
-    }
+    return a / b;
 }
 function clear() {
     previousNum = DEFAULT_CONTENT;
@@ -113,12 +115,18 @@ function clear() {
 }
 
 function roundAnswer(a) {
-    return Math.round(a * 100) / 100;
+    if (Number.isInteger(a)) {
+        return a;
+    }
+    else {
+        return Math.round(a * 100) / 100;
+    }
 }
 
 function checkResult(a) {
+    console.log(a>= MAX_RESULT);
     if (a >= MAX_RESULT) {
-        return MAX_RESULT;
+        return NaN;
     } else {
         return a;
     }
